@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Jaineel Patel — Portfolio (Python projects + demos)." />
-  <title>Jaineel Patel — Portfolio</title>
+  <meta name="description" content="Portfolio — interactive Python demos and projects." />
+  <title>Portfolio</title>
 
-  <!-- Code editor + syntax highlighting (PyCharm-like) -->
+  <!-- Code editor (syntax highlighting like an IDE) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css" />
 
@@ -14,20 +14,20 @@
     :root{
       --bg0:#050714;
       --bg1:#0b1020;
-      --card: rgba(18, 26, 51, 0.62);
-      --card2: rgba(255,255,255,0.03);
-      --muted:#a9b4d0;
       --text:#eef2ff;
+      --muted:#a9b4d0;
 
       --accent:#7c3aed;
       --accent2:#22c55e;
       --accent3:#06b6d4;
       --accent4:#f59e0b;
 
-      --border:rgba(255,255,255,.12);
+      --card: rgba(18,26,51,.62);
+      --border: rgba(255,255,255,.12);
       --shadow: 0 30px 90px rgba(0,0,0,.55);
-      --radius:22px;
-      --radius2:28px;
+
+      --radius: 22px;
+      --radius2: 28px;
     }
 
     *{box-sizing:border-box}
@@ -37,9 +37,9 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
       background:
-        radial-gradient(1000px 560px at 12% 10%, rgba(124,58,237,.30), transparent 62%),
-        radial-gradient(900px 520px at 86% 16%, rgba(6,182,212,.22), transparent 60%),
-        radial-gradient(900px 520px at 55% 88%, rgba(34,197,94,.17), transparent 62%),
+        radial-gradient(1100px 620px at 12% 10%, rgba(124,58,237,.30), transparent 62%),
+        radial-gradient(980px 560px at 86% 16%, rgba(6,182,212,.22), transparent 60%),
+        radial-gradient(980px 560px at 55% 88%, rgba(34,197,94,.16), transparent 62%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       line-height:1.55;
       overflow-x:hidden;
@@ -63,15 +63,15 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .blob{
-      position:absolute; width:620px; height:620px; border-radius:999px;
-      filter: blur(44px); opacity:.45;
+      position:absolute; width:640px; height:640px; border-radius:999px;
+      filter: blur(46px); opacity:.42;
       background:
         radial-gradient(circle at 30% 30%, rgba(124,58,237,.62), transparent 60%),
         radial-gradient(circle at 70% 70%, rgba(34,197,94,.50), transparent 55%);
       animation: floaty 16s ease-in-out infinite;
     }
     .blob.b2{
-      width:720px; height:720px; opacity:.34;
+      width:760px; height:760px; opacity:.33;
       background:
         radial-gradient(circle at 35% 35%, rgba(6,182,212,.58), transparent 60%),
         radial-gradient(circle at 70% 70%, rgba(124,58,237,.34), transparent 55%);
@@ -79,7 +79,7 @@
       animation-delay: -7s;
     }
     .blob.b3{
-      width:520px; height:520px; opacity:.30;
+      width:540px; height:540px; opacity:.28;
       background:
         radial-gradient(circle at 30% 30%, rgba(245,158,11,.50), transparent 60%),
         radial-gradient(circle at 70% 70%, rgba(6,182,212,.30), transparent 55%);
@@ -119,7 +119,7 @@
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      text-decoration:none; font-weight:800; letter-spacing:.2px;
+      text-decoration:none; font-weight:850; letter-spacing:.2px;
     }
     .dot{
       width:12px; height:12px; border-radius:999px;
@@ -174,6 +174,15 @@
     }
     .card-pad{padding:24px}
 
+    section{padding:16px 0}
+    .section-title{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:12px; margin:18px 0 12px;
+    }
+    .section-title h2{margin:0; font-size:20px}
+    .section-title p{margin:0; color:var(--muted); font-size:14px}
+
+    /* ===== Hero ===== */
     .hero{padding:38px 0 10px}
     .hero-grid{
       display:grid; gap:16px;
@@ -248,14 +257,7 @@
     .stat .k{color:var(--muted); font-size:12px}
     .stat .v{font-weight:850; margin-top:3px; font-size:15px}
 
-    section{padding:16px 0}
-    .section-title{
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap:12px; margin:18px 0 12px;
-    }
-    .section-title h2{margin:0; font-size:20px}
-    .section-title p{margin:0; color:var(--muted); font-size:14px}
-
+    /* ===== Project grid ===== */
     .grid{
       display:grid; gap:14px;
       grid-template-columns: repeat(3, 1fr);
@@ -301,18 +303,11 @@
     .reveal{opacity:0; transform: translateY(16px) scale(.99); transition: opacity .7s ease, transform .7s ease;}
     .reveal.show{opacity:1; transform: translateY(0) scale(1);}
 
-    /* ===== Python lab ===== */
-    .lab{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-    }
+    /* ===== Python Lab ===== */
+    .lab{display:grid; grid-template-columns:1fr; gap:12px;}
     .lab-top{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
     }
     .status{color:var(--muted); font-size:13px}
     .select{
@@ -326,7 +321,6 @@
       font: inherit;
     }
 
-    /* CodeMirror styling to look “IDE-ish” */
     .cm-wrap{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.14);
@@ -339,9 +333,7 @@
       font-size: 13.5px;
       line-height: 1.5;
     }
-    .cm-s-dracula.CodeMirror{
-      background: rgba(12, 14, 28, 0.92);
-    }
+    .cm-s-dracula.CodeMirror{ background: rgba(12, 14, 28, 0.92); }
     .cm-s-dracula .CodeMirror-gutters{
       background: rgba(12, 14, 28, 0.92);
       border-right: 1px solid rgba(255,255,255,.08);
@@ -369,6 +361,129 @@
       font-size:13px;
     }
 
+    /* ===== Recruiter AI Guide ===== */
+    .ai-fab{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 999;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(10, 14, 30, .72);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      cursor:pointer;
+      user-select:none;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .ai-fab:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.24); }
+    .ai-dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent3), var(--accent2));
+      box-shadow: 0 0 0 10px rgba(124,58,237,.10);
+    }
+    .ai-fab span{ font-size:14px; color: var(--text); }
+    .ai-fab small{ color: var(--muted); font-size:12px; display:block; margin-top:-2px; }
+
+    .ai-panel{
+      position: fixed;
+      right: 18px;
+      bottom: 78px;
+      width: min(420px, calc(100vw - 36px));
+      max-height: min(560px, calc(100vh - 120px));
+      z-index: 999;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(12, 16, 34, .78);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 30px 90px rgba(0,0,0,.60);
+      overflow:hidden;
+      transform: translateY(10px);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .ai-panel.open{
+      opacity:1;
+      transform: translateY(0);
+      pointer-events:auto;
+    }
+    .ai-header{
+      padding: 14px 14px 10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .ai-title{
+      display:flex; align-items:center; gap:10px;
+      font-weight:850;
+    }
+    .ai-title .badge{
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+      font-weight:750;
+    }
+    .ai-close{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 8px 10px;
+      cursor:pointer;
+    }
+    .ai-body{ padding: 12px 14px; display:flex; flex-direction:column; gap:10px; }
+    .ai-msg{
+      padding: 10px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .ai-quick{display:flex; flex-wrap:wrap; gap:8px;}
+    .ai-chip{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor:pointer;
+    }
+    .ai-inputRow{display:flex; gap:10px; align-items:center; margin-top:2px;}
+    .ai-input{
+      flex:1;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 10px 12px;
+      color: var(--text);
+      outline:none;
+    }
+    .ai-send{
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(124,58,237,.26), rgba(6,182,212,.12), rgba(34,197,94,.12));
+      color: var(--text);
+      border-radius: 16px;
+      padding: 10px 12px;
+      cursor:pointer;
+      font-weight: 750;
+    }
+    .ai-highlight{
+      outline: 2px solid rgba(124,58,237,.55);
+      box-shadow: 0 0 0 8px rgba(124,58,237,.12), 0 28px 90px rgba(0,0,0,.55);
+      border-radius: 22px;
+      transition: outline .2s ease;
+    }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       .aurora,.blob,.dot{animation:none !important;}
@@ -380,9 +495,9 @@
 <body>
   <div class="bg" aria-hidden="true">
     <div class="aurora"></div>
-    <div class="blob" style="top:-160px; left:-180px;"></div>
-    <div class="blob b2" style="top:40px; right:-260px;"></div>
-    <div class="blob b3" style="bottom:-180px; left:18vw;"></div>
+    <div class="blob" style="top:-170px; left:-200px;"></div>
+    <div class="blob b2" style="top:40px; right:-280px;"></div>
+    <div class="blob b3" style="bottom:-190px; left:18vw;"></div>
   </div>
   <div class="grain" aria-hidden="true"></div>
 
@@ -390,7 +505,7 @@
     <div class="nav-inner">
       <a class="brand" href="#top" aria-label="Go to top">
         <span class="dot" aria-hidden="true"></span>
-        <span>Jaineel Patel</span>
+        <span>Portfolio</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#python-lab">Python Lab</a>
@@ -401,52 +516,50 @@
   </header>
 
   <main id="top" class="container">
-
     <!-- HERO -->
     <section class="hero reveal">
       <div class="hero-grid">
         <div class="card card-pad">
-          <h1><span class="grad-text">Portfolio</span></h1>
+          <h1><span class="grad-text">Interactive Portfolio</span></h1>
           <p class="lead">
-            Interactive Python demos (runs in your browser) + a clean, recruiter-friendly overview of what I build.
+            Recruiter-friendly + hands-on: runnable Python demos, clean project summaries, and a guide that takes you straight to what you want.
           </p>
 
           <div class="btns">
             <a class="btn primary" href="#python-lab">Open Python Lab</a>
-            <a class="btn ghost" href="#projects">View projects</a>
+            <a class="btn ghost" href="#projects">View Projects</a>
             <a class="btn ghost" href="#about">About</a>
           </div>
 
           <div class="stats">
             <div class="stat">
-              <div class="k">What you’ll see</div>
-              <div class="v">Runnable demos + clean code</div>
+              <div class="k">Best feature</div>
+              <div class="v">Run code instantly (in-browser)</div>
             </div>
             <div class="stat">
-              <div class="k">What I focus on</div>
-              <div class="v">Math / science + Python</div>
+              <div class="k">What to scan</div>
+              <div class="v">Projects → outcomes + links</div>
             </div>
             <div class="stat">
-              <div class="k">How I work</div>
-              <div class="v">Simple, clear, testable</div>
+              <div class="k">Fast navigation</div>
+              <div class="v">Use Recruiter Guide (bottom-right)</div>
             </div>
           </div>
         </div>
 
         <aside class="card card-pad">
           <div class="section-title" style="margin-top:0">
-            <h2>Recruiter view</h2>
-            <p>30-second scan</p>
+            <h2>How to review</h2>
+            <p>30 seconds</p>
           </div>
           <div class="empty">
-            Put your strongest 3–6 projects below with outcomes:
-            <br/>• “Reduced time by 30%”
-            <br/>• “Improved accuracy to 95%”
-            <br/>• “Built X feature in Y days”
+            1) Open Python Lab → run a demo<br/>
+            2) Skim Projects → look for outcomes<br/>
+            3) Check About → what roles I’m targeting
           </div>
           <div style="height:12px"></div>
           <div class="empty">
-            The Python Lab is the “wow” factor: they can run your code instantly.
+            Tip: replace the placeholder projects with your strongest 3–6. Remove anything that’s not top-tier.
           </div>
         </aside>
       </div>
@@ -456,7 +569,7 @@
     <section id="python-lab" class="reveal">
       <div class="section-title">
         <h2>Python Lab</h2>
-        <p>Syntax-highlighted editor + run button (in-browser Python).</p>
+        <p>Syntax-highlighted editor + run button (Python runs in your browser).</p>
       </div>
 
       <div class="card card-pad">
@@ -484,8 +597,8 @@
           </div>
 
           <div class="empty">
-            Add your own demos by editing <code>PY_DEMOS</code> in the script.
-            Keep each demo short and impressive: clear output + clean code.
+            To add your own runnable projects: edit <code>PY_DEMOS</code> in the script and paste your code.
+            Keep demos short and impressive (good output + clean code).
           </div>
         </div>
       </div>
@@ -495,16 +608,14 @@
     <section id="projects" class="reveal">
       <div class="section-title">
         <h2>Projects</h2>
-        <p>Add your best projects (no filler).</p>
+        <p>Replace placeholders with your strongest work.</p>
       </div>
 
       <div class="grid">
         <article class="card project">
-          <div class="tagrow">
-            <span class="tag">Replace</span><span class="tag">With</span><span class="tag">Real</span>
-          </div>
+          <div class="tagrow"><span class="tag">Replace</span><span class="tag">With</span><span class="tag">Real</span></div>
           <h3>Project title</h3>
-          <p>2–3 lines: what it does, how you built it, and the result/impact.</p>
+          <p>2–3 lines: problem → approach → result. Include numbers if possible.</p>
           <div class="actions">
             <a class="btn small" href="#" target="_blank" rel="noopener">GitHub</a>
             <a class="btn small" href="#" target="_blank" rel="noopener">Demo</a>
@@ -512,11 +623,9 @@
         </article>
 
         <article class="card project">
-          <div class="tagrow">
-            <span class="tag">Replace</span><span class="tag">With</span><span class="tag">Real</span>
-          </div>
+          <div class="tagrow"><span class="tag">Replace</span><span class="tag">With</span><span class="tag">Real</span></div>
           <h3>Project title</h3>
-          <p>Tip: numbers impress. “Processed 50k rows”, “Saved 2 hours/day”, etc.</p>
+          <p>Example outcomes: saved time, improved accuracy, processed X data, etc.</p>
           <div class="actions">
             <a class="btn small" href="#" target="_blank" rel="noopener">GitHub</a>
             <a class="btn small" href="#" target="_blank" rel="noopener">Write-up</a>
@@ -524,11 +633,9 @@
         </article>
 
         <article class="card project">
-          <div class="tagrow">
-            <span class="tag">Replace</span><span class="tag">With</span><span class="tag">Real</span>
-          </div>
+          <div class="tagrow"><span class="tag">Replace</span><span class="tag">With</span><span class="tag">Real</span></div>
           <h3>Project title</h3>
-          <p>Keep it clean: only your best work. Remove extra cards if needed.</p>
+          <p>Remove filler. Keep only your best work to impress recruiters.</p>
           <div class="actions">
             <a class="btn small" href="#" target="_blank" rel="noopener">GitHub</a>
             <a class="btn small" href="#" target="_blank" rel="noopener">Notes</a>
@@ -546,19 +653,59 @@
 
       <div class="card card-pad">
         <p class="lead" style="margin:0">
-          Write 3–5 lines here: what you’re good at, what you enjoy building, and what roles you’re aiming for.
-          Keep it specific (Python + maths/science + building practical tools).
+          Write 3–5 lines here: what you’re good at, what you enjoy building, and what roles you’re targeting.
+          Keep it specific and backed by the projects above.
         </p>
       </div>
     </section>
 
     <footer class="reveal">
       <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <span>© <span id="year"></span> Jaineel Patel</span>
+        <span>© <span id="year"></span></span>
         <span>Hosted on GitHub Pages</span>
       </div>
     </footer>
   </main>
+
+  <!-- Recruiter AI Guide -->
+  <div class="ai-panel" id="aiPanel" aria-label="Recruiter guide panel">
+    <div class="ai-header">
+      <div class="ai-title">
+        <span class="ai-dot" aria-hidden="true"></span>
+        Recruiter Guide
+        <span class="badge">smart nav</span>
+      </div>
+      <button class="ai-close" id="aiClose" type="button">Close</button>
+    </div>
+
+    <div class="ai-body">
+      <div class="ai-msg" id="aiMsg">
+        Ask me where to find things. Try: “python demo”, “projects”, “quick overview”, or “show me code”.
+      </div>
+
+      <div class="ai-quick">
+        <button class="ai-chip" data-q="python demo" type="button">Python demo</button>
+        <button class="ai-chip" data-q="projects" type="button">Projects</button>
+        <button class="ai-chip" data-q="quick overview" type="button">Quick overview</button>
+        <button class="ai-chip" data-q="show me code" type="button">Show code</button>
+      </div>
+
+      <div class="ai-inputRow">
+        <input class="ai-input" id="aiInput" placeholder="Ask where to find things…" />
+        <button class="ai-send" id="aiSend" type="button">Go</button>
+      </div>
+
+      <div class="ai-msg" id="aiResult" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="ai-fab" id="aiFab" role="button" aria-label="Open recruiter guide">
+    <span class="ai-dot" aria-hidden="true"></span>
+    <div>
+      <span>Recruiter Guide</span>
+      <small>Find everything fast</small>
+    </div>
+  </div>
 
   <!-- CodeMirror -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
@@ -568,7 +715,7 @@
   <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
 
   <script>
-    // Year
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Smooth scroll
@@ -614,14 +761,8 @@
       }
     ];
 
-    // UI refs
+    // Populate demo dropdown
     const demoSelect = document.getElementById("demoSelect");
-    const output = document.getElementById("output");
-    const statusEl = document.getElementById("pyStatus");
-    const runBtn = document.getElementById("runBtn");
-    const resetBtn = document.getElementById("resetBtn");
-
-    // Populate demos
     PY_DEMOS.forEach((d, idx) => {
       const opt = document.createElement("option");
       opt.value = String(idx);
@@ -629,7 +770,7 @@
       demoSelect.appendChild(opt);
     });
 
-    // CodeMirror editor (PyCharm-ish vibe via Dracula theme)
+    // CodeMirror editor
     const editor = CodeMirror.fromTextArea(document.getElementById("codeArea"), {
       mode: "python",
       theme: "dracula",
@@ -638,7 +779,6 @@
       tabSize: 4,
       indentWithTabs: false,
       lineWrapping: true,
-      autofocus: false,
     });
 
     let initialCode = PY_DEMOS[0].code;
@@ -648,26 +788,27 @@
       const idx = Number(demoSelect.value);
       initialCode = PY_DEMOS[idx].code;
       editor.setValue(initialCode);
-      output.textContent = "";
+      document.getElementById("output").textContent = "";
     });
 
-    resetBtn.addEventListener("click", () => {
+    document.getElementById("resetBtn").addEventListener("click", () => {
       editor.setValue(initialCode);
-      output.textContent = "";
+      document.getElementById("output").textContent = "";
     });
 
     // Load Pyodide
-    let pyodideReady = null;
-    async function initPyodide() {
+    const statusEl = document.getElementById("pyStatus");
+    let pyodideReady = (async () => {
       statusEl.textContent = "Loading Python runtime… (first load can take a moment)";
       const pyodide = await loadPyodide();
       statusEl.textContent = "Python ready ✅";
       return pyodide;
-    }
-    pyodideReady = initPyodide();
+    })();
 
     // Run Python
-    runBtn.addEventListener("click", async () => {
+    document.getElementById("runBtn").addEventListener("click", async () => {
+      const runBtn = document.getElementById("runBtn");
+      const output = document.getElementById("output");
       runBtn.disabled = true;
       runBtn.textContent = "Running…";
       output.textContent = "";
@@ -676,7 +817,6 @@
         const pyodide = await pyodideReady;
         const code = editor.getValue();
 
-        // Capture stdout/stderr
         const wrapped = `
 import sys, io, traceback
 _buf_out = io.StringIO()
@@ -701,6 +841,87 @@ _result = _buf_out.getvalue() + _buf_err.getvalue()
         runBtn.textContent = "Run";
       }
     });
+
+    // ===== Recruiter Guide (smart navigation) =====
+    const aiFab = document.getElementById("aiFab");
+    const aiPanel = document.getElementById("aiPanel");
+    const aiClose = document.getElementById("aiClose");
+    const aiInput = document.getElementById("aiInput");
+    const aiSend = document.getElementById("aiSend");
+    const aiResult = document.getElementById("aiResult");
+
+    function openAI(){ aiPanel.classList.add("open"); setTimeout(()=>aiInput.focus(), 80); }
+    function closeAI(){ aiPanel.classList.remove("open"); }
+    aiFab.addEventListener("click", openAI);
+    aiClose.addEventListener("click", closeAI);
+
+    const ROUTES = [
+      { keys: ["python", "demo", "run", "lab", "emulator", "code"], target: "#python-lab", msg: "Opening the Python Lab — run a demo and view the code." },
+      { keys: ["project", "projects", "portfolio", "work"], target: "#projects", msg: "Taking you to Projects — scan outcomes + links." },
+      { keys: ["about", "overview", "quick", "summary", "tldr"], target: "#top", msg: "Jumping to the top overview for a quick scan." },
+    ];
+
+    function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+    function bestRoute(query){
+      const q = normalize(query);
+      if (!q) return null;
+      let best = null, bestScore = 0;
+      for (const r of ROUTES){
+        let score = 0;
+        for (const k of r.keys) if (q.includes(k)) score += 1;
+        if (score > bestScore){ bestScore = score; best = r; }
+      }
+      return bestScore > 0 ? best : null;
+    }
+
+    function highlightSection(el){
+      document.querySelectorAll(".ai-highlight").forEach(x => x.classList.remove("ai-highlight"));
+      el.classList.add("ai-highlight");
+      setTimeout(()=> el.classList.remove("ai-highlight"), 1800);
+    }
+
+    function goTo(target, message){
+      const el = document.querySelector(target);
+      if (!el){
+        aiResult.style.display = "block";
+        aiResult.textContent = `I couldn't find ${target} on this page yet.`;
+        return;
+      }
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      highlightSection(el);
+      aiResult.style.display = "block";
+      aiResult.textContent = message;
+    }
+
+    function handleAsk(text){
+      const route = bestRoute(text);
+      if (!route){
+        aiResult.style.display = "block";
+        aiResult.textContent = "Try: “python demo”, “projects”, or “quick overview”.";
+        return;
+      }
+      goTo(route.target, route.msg);
+    }
+
+    aiSend.addEventListener("click", () => handleAsk(aiInput.value));
+    aiInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") handleAsk(aiInput.value);
+      if (e.key === "Escape") closeAI();
+    });
+
+    document.querySelectorAll(".ai-chip").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const q = btn.getAttribute("data-q");
+        aiInput.value = q;
+        handleAsk(q);
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "?" && !aiPanel.classList.contains("open")) openAI();
+    });
   </script>
 </body>
 </html>
+
