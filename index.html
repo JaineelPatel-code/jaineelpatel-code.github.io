@@ -14,6 +14,7 @@
       --text:#eef2ff;
       --accent:#7c3aed;
       --accent2:#22c55e;
+      --accent3:#06b6d4;
       --border:rgba(255,255,255,.10);
       --shadow: 0 18px 50px rgba(0,0,0,.35);
     }
@@ -28,12 +29,58 @@
         linear-gradient(180deg, #070a15, var(--bg));
       color:var(--text);
       line-height:1.5;
+      overflow-x:hidden;
     }
+
+    /* ===== Animated background blobs ===== */
+    .bg-blobs{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      filter: blur(40px);
+      opacity:.65;
+    }
+    .blob{
+      position:absolute;
+      width:520px;
+      height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(124,58,237,.55), transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(34,197,94,.45), transparent 55%);
+      animation: floaty 14s ease-in-out infinite;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:560px; height:560px;
+      background: radial-gradient(circle at 35% 35%, rgba(6,182,212,.50), transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(124,58,237,.35), transparent 55%);
+      animation-duration: 18s;
+      animation-delay: -6s;
+      opacity:.8;
+    }
+    .blob.b3{
+      width:420px; height:420px;
+      background: radial-gradient(circle at 30% 30%, rgba(34,197,94,.50), transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(6,182,212,.35), transparent 55%);
+      animation-duration: 16s;
+      animation-delay: -9s;
+      opacity:.75;
+    }
+    @keyframes floaty{
+      0%   { transform: translate(5vw, 4vh) scale(1); }
+      25%  { transform: translate(60vw, 8vh) scale(1.06); }
+      50%  { transform: translate(35vw, 55vh) scale(0.98); }
+      75%  { transform: translate(8vw, 45vh) scale(1.08); }
+      100% { transform: translate(5vw, 4vh) scale(1); }
+    }
+
     a{color:inherit}
     .container{max-width:1100px; margin:0 auto; padding:24px}
+
     .nav{
       position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       background: rgba(7,10,21,.55);
       border-bottom:1px solid var(--border);
     }
@@ -51,7 +98,13 @@
       width:12px; height:12px; border-radius:999px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 0 0 4px rgba(124,58,237,.15);
+      animation: pulse 2.6s ease-in-out infinite;
     }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); box-shadow: 0 0 0 4px rgba(124,58,237,.15); }
+      50%{ transform: scale(1.12); box-shadow: 0 0 0 8px rgba(124,58,237,.12); }
+    }
+
     .nav-links{display:flex; gap:14px; flex-wrap:wrap}
     .nav-links a{
       text-decoration:none;
@@ -77,11 +130,33 @@
     @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
 
     .card{
-      background: rgba(18,26,51,.85);
+      background: rgba(18,26,51,.78);
       border:1px solid var(--border);
       border-radius:18px;
       box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
+    /* subtle animated shine */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.06), transparent 65%);
+      transform: translateX(-40%);
+      opacity:0;
+      transition: opacity .35s ease;
+      pointer-events:none;
+    }
+    .card:hover::before{
+      opacity:1;
+      animation: shine 1.15s ease;
+    }
+    @keyframes shine{
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(50%); }
+    }
+
     .card-pad{padding:22px}
     h1{margin:0 0 10px; font-size:40px; line-height:1.1}
     @media (max-width: 520px){ h1{font-size:34px} }
@@ -98,8 +173,9 @@
       color:var(--text);
       transition: transform .16s ease, background .16s ease, border-color .16s ease;
       font-size:14px;
+      will-change: transform;
     }
-    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18)}
+    .btn:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18)}
     .btn.primary{
       border-color: rgba(124,58,237,.35);
       background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(34,197,94,.16));
@@ -116,6 +192,7 @@
       border-radius:16px;
       border:1px solid var(--border);
       background: rgba(255,255,255,.03);
+      transform: translateZ(0);
     }
     .meta .k{color:var(--muted); font-size:12px}
     .meta .v{font-weight:600; margin-top:3px}
@@ -139,7 +216,9 @@
       padding:18px;
       display:flex; flex-direction:column; gap:10px;
       min-height: 170px;
+      transition: transform .18s ease, border-color .18s ease;
     }
+    .project:hover{ transform: translateY(-3px); border-color: rgba(255,255,255,.18); }
     .project h3{margin:0; font-size:16px}
     .project p{margin:0; color:var(--muted); font-size:13.5px}
     .tagrow{display:flex; flex-wrap:wrap; gap:8px}
@@ -175,10 +254,80 @@
       padding:2px 6px;
       border-radius:10px;
     }
+
+    /* ===== Scroll-reveal animation ===== */
+    .reveal{
+      opacity:0;
+      transform: translateY(12px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* ===== Python Runner (Pyodide) ===== */
+    .runner{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    .runner-top{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    select, textarea{
+      font: inherit;
+      color: var(--text);
+    }
+    .select{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      min-width: 240px;
+    }
+    .editor{
+      width:100%;
+      min-height: 240px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      resize: vertical;
+      outline: none;
+    }
+    .console{
+      width:100%;
+      min-height: 140px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.26);
+      color: #e6e9ff;
+      overflow:auto;
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+    }
+    .status{
+      color: var(--muted);
+      font-size: 13px;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Animated background -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob" style="top:-120px; left:-120px;"></div>
+    <div class="blob b2" style="top:80px; right:-180px;"></div>
+    <div class="blob b3" style="bottom:-140px; left:18vw;"></div>
+  </div>
+
   <!-- Top Navigation -->
   <header class="nav">
     <div class="nav-inner">
@@ -197,7 +346,7 @@
 
   <main id="top" class="container">
     <!-- Hero -->
-    <section class="hero">
+    <section class="hero reveal">
       <div class="hero-grid">
         <div class="card card-pad">
           <h1>Portfolio</h1>
@@ -240,75 +389,96 @@
     </section>
 
     <!-- Python Projects -->
-    <section id="python-projects">
+    <section id="python-projects" class="reveal">
       <div class="section-title">
         <h2>Python Projects</h2>
-        <p>Add your projects as cards below (titles, results, links).</p>
+        <p>Show projects + run code directly in the browser.</p>
       </div>
 
-      <div class="card card-pad" style="margin-bottom:14px">
-        <div class="lead" style="margin:0">
-          To add a project, duplicate a <code>&lt;article class="card project"&gt;</code> block and edit:
-          title, description, tags, and links.
+      <!-- Python runner -->
+      <div class="card card-pad">
+        <div class="runner">
+          <div class="runner-top">
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <label class="status" for="projectSelect"><strong>Choose a demo:</strong></label>
+              <select class="select" id="projectSelect" aria-label="Select a Python demo"></select>
+            </div>
+
+            <div class="btns" style="margin:0">
+              <button class="btn primary" id="runBtn" type="button">Run Python</button>
+              <button class="btn" id="resetBtn" type="button">Reset code</button>
+            </div>
+          </div>
+
+          <div class="status" id="pyStatus">Loading Python runtime…</div>
+
+          <textarea class="editor" id="codeEditor" spellcheck="false"></textarea>
+
+          <div>
+            <div class="status" style="margin-bottom:8px;">Output</div>
+            <div class="console" id="output" aria-label="Python output console"></div>
+          </div>
+
+          <div class="empty">
+            Add your own projects by editing the <code>PY_PROJECTS</code> list in the script at the bottom.
+            For bigger projects, link to GitHub + include a short runnable snippet here.
+          </div>
         </div>
       </div>
 
+      <div style="height:14px"></div>
+
+      <!-- Your existing project cards (optional list) -->
       <div class="grid">
-        <!-- EMPTY STATE: Replace these placeholders with your real Python projects -->
         <article class="card project">
           <div class="tagrow">
             <span class="tag">Python</span>
-            <span class="tag">Project</span>
+            <span class="tag">Add yours</span>
           </div>
-          <h3>Your Python Project Title</h3>
+          <h3>Project Card (Optional)</h3>
           <p>
-            1–2 lines: what you built, what problem it solves, and one measurable outcome if possible.
+            Use these cards for your full projects (GitHub links, write-ups), and keep runnable demos above.
           </p>
           <div class="actions">
             <a class="btn small" href="#" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn small" href="#" target="_blank" rel="noopener">Demo / Write-up</a>
+            <a class="btn small" href="#" target="_blank" rel="noopener">Write-up</a>
           </div>
         </article>
 
         <article class="card project">
           <div class="tagrow">
             <span class="tag">Python</span>
-            <span class="tag">Data</span>
+            <span class="tag">Add yours</span>
           </div>
-          <h3>Your Python Project Title</h3>
+          <h3>Project Card (Optional)</h3>
           <p>
-            Example: data analysis / automation / web scraping (only if allowed) / modelling / dashboards.
-          </p>
-          <div class="actions">
-            <a class="btn small" href="#" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn small" href="#" target="_blank" rel="noopener">Notebook</a>
-          </div>
-        </article>
-
-        <article class="card project">
-          <div class="tagrow">
-            <span class="tag">Python</span>
-            <span class="tag">Math</span>
-          </div>
-          <h3>Your Python Project Title</h3>
-          <p>
-            Example: simulations, Monte Carlo, optimisation, or a maths visualiser.
+            Add outcomes (speedup %, accuracy, users, etc.) — that looks strong on a CV.
           </p>
           <div class="actions">
             <a class="btn small" href="#" target="_blank" rel="noopener">GitHub</a>
             <a class="btn small" href="#" target="_blank" rel="noopener">Demo</a>
           </div>
         </article>
-      </div>
 
-      <div class="empty" style="margin-top:14px">
-        Want this to auto-populate from GitHub? You can do that with a tiny JSON file or the GitHub API + JavaScript.
-        If you tell me your GitHub username (optional), I can wire it in.
+        <article class="card project">
+          <div class="tagrow">
+            <span class="tag">Python</span>
+            <span class="tag">Add yours</span>
+          </div>
+          <h3>Project Card (Optional)</h3>
+          <p>
+            Keep this section clean: 3–6 strongest projects only.
+          </p>
+          <div class="actions">
+            <a class="btn small" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn small" href="#" target="_blank" rel="noopener">Notes</a>
+          </div>
+        </article>
       </div>
     </section>
 
     <!-- Other Projects (non-Python) -->
-    <section id="projects">
+    <section id="projects" class="reveal">
       <div class="section-title">
         <h2>Other Projects</h2>
         <p>Use this for non-Python work (presentations, research, notes, tools).</p>
@@ -320,7 +490,7 @@
     </section>
 
     <!-- YouTube -->
-    <section id="youtube">
+    <section id="youtube" class="reveal">
       <div class="section-title">
         <h2>YouTube</h2>
         <p>Featured video (replace the video ID), plus quick links.</p>
@@ -329,7 +499,6 @@
       <div class="grid" style="grid-template-columns: 1.3fr .7fr;">
         <div class="card" style="padding:0; overflow:hidden;">
           <div style="position:relative; width:100%; padding-top:56.25%;">
-            <!-- Replace VIDEO_ID with a real YouTube video id from your channel -->
             <iframe
               src="https://www.youtube.com/embed/VIDEO_ID"
               title="JPsMathAndScience featured video"
@@ -361,7 +530,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="reveal">
       <div class="section-title">
         <h2>Contact</h2>
         <p>Best ways to reach me.</p>
@@ -385,18 +554,22 @@
       </div>
     </section>
 
-    <footer>
+    <footer class="reveal">
       <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
         <span>© <span id="year"></span> Jaineel Patel</span>
-        <span>Built with plain HTML/CSS — easy to host on GitHub Pages.</span>
+        <span>Built with plain HTML/CSS — hosted on GitHub Pages.</span>
       </div>
     </footer>
   </main>
 
+  <!-- Pyodide (Python in the browser) -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+
   <script>
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Optional: smooth scroll for in-page links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
@@ -406,6 +579,120 @@
         el.scrollIntoView({ behavior: "smooth", block: "start" });
         history.pushState(null, "", id);
       });
+    });
+
+    // Scroll reveal
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add("show");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // ===== Python runner demos (edit these) =====
+    const PY_PROJECTS = [
+      {
+        name: "Hello World + math",
+        tags: ["basics"],
+        code: `print("Hello from Python in your browser!")\n\nimport math\nx = 2\nprint("sqrt(2) =", math.sqrt(x))`
+      },
+      {
+        name: "Prime checker",
+        tags: ["math"],
+        code: `def is_prime(n):\n    if n < 2:\n        return False\n    if n % 2 == 0:\n        return n == 2\n    i = 3\n    while i*i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    return True\n\nfor n in range(1, 31):\n    if is_prime(n):\n        print(n, "is prime")`
+      },
+      {
+        name: "Monte Carlo Pi",
+        tags: ["simulation"],
+        code: `import random\n\nN = 20000\ninside = 0\nfor _ in range(N):\n    x = random.random()\n    y = random.random()\n    if x*x + y*y <= 1:\n        inside += 1\n\npi_est = 4 * inside / N\nprint("Estimated pi:", pi_est)\nprint("Samples:", N)`
+      }
+    ];
+
+    // DOM refs
+    const projectSelect = document.getElementById("projectSelect");
+    const editor = document.getElementById("codeEditor");
+    const output = document.getElementById("output");
+    const statusEl = document.getElementById("pyStatus");
+    const runBtn = document.getElementById("runBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    // Populate dropdown
+    PY_PROJECTS.forEach((p, idx) => {
+      const opt = document.createElement("option");
+      opt.value = String(idx);
+      opt.textContent = p.name;
+      projectSelect.appendChild(opt);
+    });
+
+    let initialCode = PY_PROJECTS[0].code;
+    editor.value = initialCode;
+
+    projectSelect.addEventListener("change", () => {
+      const idx = Number(projectSelect.value);
+      initialCode = PY_PROJECTS[idx].code;
+      editor.value = initialCode;
+      output.textContent = "";
+    });
+
+    resetBtn.addEventListener("click", () => {
+      editor.value = initialCode;
+      output.textContent = "";
+    });
+
+    // Load Pyodide
+    let pyodideReady = null;
+    async function initPyodide() {
+      statusEl.textContent = "Loading Python runtime… (first load can take a moment)";
+      const pyodide = await loadPyodide();
+      statusEl.textContent = "Python ready ✅";
+      return pyodide;
+    }
+    pyodideReady = initPyodide();
+
+    // Capture print output
+    function setOutput(text, append=false){
+      if (!append) output.textContent = text;
+      else output.textContent += text;
+      output.scrollTop = output.scrollHeight;
+    }
+
+    // Run code
+    runBtn.addEventListener("click", async () => {
+      runBtn.disabled = true;
+      runBtn.textContent = "Running…";
+      setOutput("");
+
+      try {
+        const pyodide = await pyodideReady;
+
+        // Redirect stdout/stderr inside Python to a string buffer we can read
+        const wrapped = `
+import sys, io, traceback
+_buf_out = io.StringIO()
+_buf_err = io.StringIO()
+_old_out, _old_err = sys.stdout, sys.stderr
+sys.stdout, sys.stderr = _buf_out, _buf_err
+try:
+${editor.value.split("\n").map(l => "    " + l).join("\n")}
+except Exception:
+    traceback.print_exc()
+finally:
+    sys.stdout, sys.stderr = _old_out, _old_err
+_result = _buf_out.getvalue() + _buf_err.getvalue()
+`;
+        await pyodide.runPythonAsync(wrapped);
+        const result = pyodide.globals.get("_result");
+        setOutput(result || "(no output)");
+      } catch (err) {
+        setOutput(String(err));
+      } finally {
+        runBtn.disabled = false;
+        runBtn.textContent = "Run Python";
+      }
     });
   </script>
 </body>
