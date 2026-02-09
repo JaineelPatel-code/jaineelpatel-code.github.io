@@ -3,31 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Jaineel Patel — interactive Python demos and projects." />
+  <meta name="description" content="Jaineel Patel — quantitative projects and interactive Python demos." />
   <title>Jaineel Patel — Portfolio</title>
 
-  <!-- Code editor (syntax highlighting like an IDE) -->
+  <!-- Code editor -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css" />
 
   <style>
     :root{
-      --bg0:#050714;
-      --bg1:#0b1020;
-      --text:#eef2ff;
-      --muted:#a9b4d0;
+      /* Professional light theme */
+      --bg: #f6f7fb;
+      --bg2:#eef2ff;
+      --text:#0f172a;      /* slate-900 */
+      --muted:#475569;     /* slate-600 */
+      --muted2:#64748b;    /* slate-500 */
 
-      --accent:#7c3aed;
-      --accent2:#22c55e;
-      --accent3:#06b6d4;
-      --accent4:#f59e0b;
+      --card:#ffffff;
+      --border:#e2e8f0;    /* slate-200 */
+      --shadow: 0 18px 50px rgba(2,6,23,.08); /* slate-950 */
 
-      --card: rgba(18,26,51,.62);
-      --border: rgba(255,255,255,.12);
-      --shadow: 0 30px 90px rgba(0,0,0,.55);
+      --accent:#2563eb;    /* blue-600 */
+      --accent2:#0ea5e9;   /* sky-500 */
+      --accent3:#10b981;   /* emerald-500 */
 
-      --radius: 22px;
-      --radius2: 28px;
+      --radius: 18px;
+      --radius2: 22px;
     }
 
     *{box-sizing:border-box}
@@ -37,228 +38,233 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
       background:
-        radial-gradient(1100px 620px at 12% 10%, rgba(124,58,237,.30), transparent 62%),
-        radial-gradient(980px 560px at 86% 16%, rgba(6,182,212,.22), transparent 60%),
-        radial-gradient(980px 560px at 55% 88%, rgba(34,197,94,.16), transparent 62%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+        radial-gradient(1200px 700px at 8% 8%, rgba(37,99,235,.10), transparent 60%),
+        radial-gradient(900px 560px at 92% 18%, rgba(14,165,233,.10), transparent 60%),
+        radial-gradient(800px 520px at 50% 92%, rgba(16,185,129,.07), transparent 60%),
+        linear-gradient(180deg, var(--bg), #ffffff);
       line-height:1.55;
       overflow-x:hidden;
     }
 
-    /* ===== Cinematic background layers ===== */
-    .bg{position:fixed; inset:0; z-index:-3; pointer-events:none; overflow:hidden;}
-    .aurora{
-      position:absolute; inset:-50%;
-      background: conic-gradient(from 140deg,
-        rgba(124,58,237,.38),
-        rgba(6,182,212,.22),
-        rgba(34,197,94,.22),
-        rgba(245,158,11,.18),
-        rgba(124,58,237,.34));
-      filter: blur(70px);
-      opacity:.28;
-      animation: spin 26s linear infinite;
-      transform-origin: 50% 50%;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .blob{
-      position:absolute; width:640px; height:640px; border-radius:999px;
-      filter: blur(46px); opacity:.42;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(124,58,237,.62), transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(34,197,94,.50), transparent 55%);
-      animation: floaty 16s ease-in-out infinite;
-    }
-    .blob.b2{
-      width:760px; height:760px; opacity:.33;
-      background:
-        radial-gradient(circle at 35% 35%, rgba(6,182,212,.58), transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(124,58,237,.34), transparent 55%);
-      animation-duration: 22s;
-      animation-delay: -7s;
-    }
-    .blob.b3{
-      width:540px; height:540px; opacity:.28;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(245,158,11,.50), transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(6,182,212,.30), transparent 55%);
-      animation-duration: 18s;
-      animation-delay: -10s;
-    }
-    @keyframes floaty{
-      0%   { transform: translate(4vw, 6vh) scale(1); }
-      25%  { transform: translate(58vw, 10vh) scale(1.06); }
-      50%  { transform: translate(38vw, 58vh) scale(0.98); }
-      75%  { transform: translate(10vw, 48vh) scale(1.08); }
-      100% { transform: translate(4vw, 6vh) scale(1); }
-    }
-
-    .grain{
-      position:fixed; inset:0; z-index:-2; pointer-events:none;
-      opacity:.11;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-    }
-
-    .container{max-width:1180px; margin:0 auto; padding:24px}
     a{color:inherit}
+    .container{max-width:1120px; margin:0 auto; padding:22px}
 
     /* ===== Nav ===== */
     .nav{
       position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(16px);
-      background: rgba(7,10,21,.55);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(14px);
       border-bottom:1px solid var(--border);
     }
     .nav-inner{
       display:flex; align-items:center; justify-content:space-between;
       gap:16px;
-      padding:14px 24px;
-      max-width:1180px; margin:0 auto;
+      padding:12px 18px;
+      max-width:1120px; margin:0 auto;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      text-decoration:none; font-weight:850; letter-spacing:.2px;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.2px;
     }
-    .dot{
+    .brand-dot{
       width:12px; height:12px; border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent3), var(--accent2));
-      box-shadow: 0 0 0 10px rgba(124,58,237,.10);
-      animation: pulse 2.8s ease-in-out infinite;
+      background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+      box-shadow: 0 0 0 8px rgba(37,99,235,.10);
     }
-    @keyframes pulse{
-      0%,100%{ transform: scale(1); box-shadow: 0 0 0 10px rgba(124,58,237,.10); }
-      50%{ transform: scale(1.18); box-shadow: 0 0 0 16px rgba(124,58,237,.07); }
-    }
-    .nav-links{display:flex; gap:12px; flex-wrap:wrap}
+    .nav-links{display:flex; gap:8px; flex-wrap:wrap}
     .nav-links a{
       text-decoration:none;
       color:var(--muted);
       padding:8px 10px;
-      border-radius:14px;
+      border-radius:12px;
       border:1px solid transparent;
-      transition:all .18s ease;
+      transition:all .16s ease;
       font-size:14px;
     }
     .nav-links a:hover{
       color:var(--text);
-      border-color: rgba(255,255,255,.16);
-      background: rgba(255,255,255,.03);
+      border-color: var(--border);
+      background: rgba(2,6,23,.03);
     }
 
     /* ===== Cards / sections ===== */
+    section{padding:14px 0}
     .card{
       background: var(--card);
       border:1px solid var(--border);
       border-radius: var(--radius2);
       box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
     }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.08), transparent 65%);
-      transform: translateX(-55%);
-      opacity:0;
-      pointer-events:none;
-    }
-    .card:hover::before{
-      opacity:1;
-      animation: shine 1.05s ease;
-    }
-    @keyframes shine{
-      from { transform: translateX(-65%); }
-      to   { transform: translateX(65%); }
-    }
-    .card-pad{padding:24px}
+    .card-pad{padding:22px}
 
-    section{padding:16px 0}
     .section-title{
       display:flex; align-items:baseline; justify-content:space-between;
-      gap:12px; margin:18px 0 12px;
+      gap:12px; margin:16px 0 10px;
     }
-    .section-title h2{margin:0; font-size:20px}
-    .section-title p{margin:0; color:var(--muted); font-size:14px}
+    .section-title h2{margin:0; font-size:18px; letter-spacing:.2px}
+    .section-title p{margin:0; color:var(--muted); font-size:13.5px}
 
     /* ===== Hero ===== */
-    .hero{padding:38px 0 10px}
+    .hero{padding:26px 0 6px}
     .hero-grid{
-      display:grid; gap:16px;
+      display:grid; gap:14px;
       grid-template-columns: 1.25fr .75fr;
       align-items:stretch;
     }
     @media (max-width: 940px){ .hero-grid{grid-template-columns:1fr} }
 
     h1{
-      margin:0 0 10px;
-      font-size:48px;
+      margin:0 0 8px;
+      font-size:42px;
       line-height:1.05;
-      letter-spacing:-.8px;
+      letter-spacing:-.6px;
     }
-    @media (max-width: 560px){ h1{font-size:38px} }
+    @media (max-width: 560px){ h1{font-size:34px} }
 
-    .grad-text{
-      background: linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2), var(--accent4), var(--accent));
-      background-size: 300% 100%;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      animation: grad 8s ease infinite;
-    }
-    @keyframes grad{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-
-    .lead{
-      margin:0 0 16px;
+    .subhead{
+      margin:0 0 14px;
       color:var(--muted);
-      font-size:15.5px;
-      max-width: 70ch;
+      font-size:15px;
+      max-width: 72ch;
+    }
+
+    .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(2,6,23,.02);
+      color: var(--muted);
     }
 
     .btns{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
     .btn{
-      display:inline-flex; align-items:center; gap:10px;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
       text-decoration:none;
       padding:10px 12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: #fff;
       color:var(--text);
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+      transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
       font-size:14px;
       cursor:pointer;
-      will-change: transform;
-      position:relative;
+      user-select:none;
     }
-    .btn:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.24)}
+    .btn:hover{transform: translateY(-1px); border-color:#cbd5e1; box-shadow: 0 14px 36px rgba(2,6,23,.08);}
     .btn.primary{
-      border-color: rgba(124,58,237,.40);
-      background: linear-gradient(135deg, rgba(124,58,237,.26), rgba(6,182,212,.12), rgba(34,197,94,.12));
+      border-color: rgba(37,99,235,.35);
+      background: linear-gradient(135deg, rgba(37,99,235,.12), rgba(14,165,233,.10));
     }
-    .btn.ghost{background: rgba(255,255,255,.02)}
     .btn[disabled]{opacity:.55; cursor:not-allowed; transform:none}
 
-    .stats{
-      display:grid; gap:12px;
-      grid-template-columns: repeat(3, 1fr);
-      margin-top:18px;
+    .summary-box{
+      border-radius:18px;
+      border:1px solid var(--border);
+      background: rgba(2,6,23,.02);
+      padding:14px;
+      color:var(--muted);
+      font-size:13.5px;
     }
-    @media (max-width: 940px){ .stats{grid-template-columns: 1fr} }
-    .stat{
+
+    /* ===== Python Lab ===== */
+    .lab{display:grid; grid-template-columns:1fr; gap:12px;}
+    .lab-top{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+    }
+    .status{color:var(--muted); font-size:13px}
+
+    .select{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: #fff;
+      min-width: 320px;
+      outline:none;
+      color: var(--text);
+      font: inherit;
+    }
+    /* Fix “white/unreadable when selecting” */
+    select option{
+      color: #0f172a !important;
+      background: #ffffff !important;
+    }
+
+    .lab-subbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(2,6,23,.02);
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .cm-wrap{
+      border-radius:18px;
+      border:1px solid var(--border);
+      overflow:hidden;
+      background: #0b1220; /* slight frame around editor */
+    }
+    .CodeMirror{
+      height: 420px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    .console{
+      width:100%;
+      min-height: 160px;
       padding:14px;
       border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      background: #0b1220;
+      color: #e5e7eb;
+      overflow:auto;
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size: 13px;
     }
-    .stat .k{color:var(--muted); font-size:12px}
-    .stat .v{font-weight:850; margin-top:3px; font-size:15px}
 
-    /* ===== Project grid ===== */
+    .plot-wrap{
+      border-radius:18px;
+      border:1px solid var(--border);
+      background: #fff;
+      padding:12px;
+      overflow:hidden;
+    }
+    .plot-title{color:var(--muted); font-size:13px; margin:0 0 10px;}
+    .plot-img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: #fff;
+    }
+    .empty{
+      padding:14px;
+      border-radius:16px;
+      border:1px dashed #cbd5e1;
+      background: rgba(2,6,23,.01);
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    /* ===== Projects ===== */
     .grid{
       display:grid; gap:14px;
       grid-template-columns: repeat(3, 1fr);
@@ -269,133 +275,51 @@
     .project{
       padding:18px;
       display:flex; flex-direction:column; gap:10px;
-      min-height: 190px;
+      min-height: 210px;
       border-radius: var(--radius);
-      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
     }
     .project:hover{
-      transform: translateY(-5px);
-      border-color: rgba(255,255,255,.22);
-      box-shadow: 0 34px 110px rgba(0,0,0,.58);
+      transform: translateY(-3px);
+      border-color:#cbd5e1;
+      box-shadow: 0 20px 60px rgba(2,6,23,.12);
     }
-    .project h3{margin:0; font-size:16px}
-    .project p{margin:0; color:var(--muted); font-size:13.5px}
     .tagrow{display:flex; flex-wrap:wrap; gap:8px}
     .tag{
       font-size:12px;
-      padding:6px 8px;
+      padding:6px 9px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid var(--border);
       color:var(--muted);
-      background: rgba(255,255,255,.03);
+      background: rgba(37,99,235,.06);
+    }
+    .project h3{
+      margin:0;
+      font-size:15.5px;
+      letter-spacing:.1px;
+      color: var(--text);
+    }
+    .project p{
+      margin:0;
+      color:var(--muted);
+      font-size:13.5px;
     }
     .actions{margin-top:auto; display:flex; flex-wrap:wrap; gap:10px}
-    .small{font-size:13px; padding:8px 10px; border-radius:14px}
-
-    .empty{
-      padding:18px;
-      border-radius:18px;
-      border:1px dashed rgba(255,255,255,.18);
-      background: rgba(255,255,255,.02);
-      color: var(--muted);
-    }
-
-    /* ===== Scroll reveal ===== */
-    .reveal{opacity:0; transform: translateY(16px) scale(.99); transition: opacity .7s ease, transform .7s ease;}
-    .reveal.show{opacity:1; transform: translateY(0) scale(1);}
-
-    /* ===== Python Lab ===== */
-    .lab{display:grid; grid-template-columns:1fr; gap:12px;}
-    .lab-top{
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
-    }
-    .status{color:var(--muted); font-size:13px}
-    .select{
-      padding:10px 12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      min-width: 260px;
-      outline:none;
-      color: var(--text);
-      font: inherit;
-    }
-
-    .cm-wrap{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      overflow:hidden;
-      background: rgba(0,0,0,.18);
-    }
-    .CodeMirror{
-      height: 420px; /* bigger, easier to read */
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      font-size: 13.5px;
-      line-height: 1.5;
-    }
-    .cm-s-dracula.CodeMirror{ background: rgba(12, 14, 28, 0.92); }
-    .cm-s-dracula .CodeMirror-gutters{
-      background: rgba(12, 14, 28, 0.92);
-      border-right: 1px solid rgba(255,255,255,.08);
-    }
-    .lab-subbar{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      padding:10px 12px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .console{
-      width:100%;
-      min-height: 160px;
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.30);
-      color: #e6e9ff;
-      overflow:auto;
-      white-space: pre-wrap;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      font-size: 13px;
-    }
-
-    .plot-wrap{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.26);
-      padding:12px;
-      overflow:hidden;
-    }
-    .plot-title{color:var(--muted); font-size:13px; margin:0 0 10px;}
-    .plot-img{
-      width:100%;
-      height:auto;
-      display:block;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-    }
+    .small{font-size:13px; padding:8px 10px; border-radius:12px}
 
     footer{
       margin-top:18px;
-      padding:22px 0 30px;
+      padding:18px 0 28px;
       color:var(--muted);
-      border-top:1px solid rgba(255,255,255,.10);
+      border-top:1px solid var(--border);
       font-size:13px;
     }
 
-    /* ===== Recruiter AI Guide ===== */
+    /* ===== Scroll reveal ===== */
+    .reveal{opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease;}
+    .reveal.show{opacity:1; transform: translateY(0);}
+
+    /* ===== Recruiter Guide ===== */
     .ai-fab{
       position: fixed;
       right: 18px;
@@ -406,19 +330,19 @@
       gap:10px;
       padding:12px 14px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(10, 14, 30, .72);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.90);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 55px rgba(2,6,23,.10);
       cursor:pointer;
       user-select:none;
-      transition: transform .18s ease, border-color .18s ease;
+      transition: transform .14s ease, border-color .14s ease;
     }
-    .ai-fab:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.24); }
+    .ai-fab:hover{ transform: translateY(-1px); border-color:#cbd5e1; }
     .ai-dot{
       width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent3), var(--accent2));
-      box-shadow: 0 0 0 10px rgba(124,58,237,.10);
+      background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+      box-shadow: 0 0 0 8px rgba(37,99,235,.10);
     }
     .ai-fab span{ font-size:14px; color: var(--text); }
     .ai-fab small{ color: var(--muted); font-size:12px; display:block; margin-top:-2px; }
@@ -430,16 +354,16 @@
       width: min(420px, calc(100vw - 36px));
       max-height: min(560px, calc(100vh - 120px));
       z-index: 999;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(12, 16, 34, .78);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 30px 90px rgba(0,0,0,.60);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 26px 80px rgba(2,6,23,.14);
       overflow:hidden;
-      transform: translateY(10px);
+      transform: translateY(8px);
       opacity: 0;
       pointer-events:none;
-      transition: opacity .18s ease, transform .18s ease;
+      transition: opacity .16s ease, transform .16s ease;
     }
     .ai-panel.open{
       opacity:1;
@@ -447,45 +371,46 @@
       pointer-events:auto;
     }
     .ai-header{
-      padding: 14px 14px 10px;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      padding: 12px 12px 10px;
+      border-bottom:1px solid var(--border);
       display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
     .ai-title{
       display:flex; align-items:center; gap:10px;
-      font-weight:850;
+      font-weight:800;
+      color: var(--text);
     }
     .ai-title .badge{
       font-size:12px;
       padding:4px 8px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid var(--border);
       color: var(--muted);
-      background: rgba(255,255,255,.03);
-      font-weight:750;
+      background: rgba(2,6,23,.02);
+      font-weight:700;
     }
     .ai-close{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      background: #fff;
       color: var(--text);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 8px 10px;
       cursor:pointer;
     }
-    .ai-body{ padding: 12px 14px; display:flex; flex-direction:column; gap:10px; }
+    .ai-body{ padding: 12px; display:flex; flex-direction:column; gap:10px; }
     .ai-msg{
       padding: 10px 12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(2,6,23,.02);
       color: var(--muted);
       font-size: 13.5px;
       line-height: 1.45;
     }
     .ai-quick{display:flex; flex-wrap:wrap; gap:8px;}
     .ai-chip{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      background: #fff;
       color: var(--text);
       border-radius: 999px;
       padding: 8px 10px;
@@ -495,50 +420,41 @@
     .ai-inputRow{display:flex; gap:10px; align-items:center; margin-top:2px;}
     .ai-input{
       flex:1;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
+      border:1px solid var(--border);
+      background: #fff;
+      border-radius: 14px;
       padding: 10px 12px;
       color: var(--text);
       outline:none;
     }
     .ai-send{
-      border:1px solid rgba(255,255,255,.14);
-      background: linear-gradient(135deg, rgba(124,58,237,.26), rgba(6,182,212,.12), rgba(34,197,94,.12));
+      border:1px solid rgba(37,99,235,.35);
+      background: linear-gradient(135deg, rgba(37,99,235,.12), rgba(14,165,233,.10));
       color: var(--text);
-      border-radius: 16px;
+      border-radius: 14px;
       padding: 10px 12px;
       cursor:pointer;
       font-weight: 750;
     }
     .ai-highlight{
-      outline: 2px solid rgba(124,58,237,.55);
-      box-shadow: 0 0 0 8px rgba(124,58,237,.12), 0 28px 90px rgba(0,0,0,.55);
-      border-radius: 22px;
+      outline: 2px solid rgba(37,99,235,.35);
+      box-shadow: 0 0 0 7px rgba(37,99,235,.10), 0 22px 70px rgba(2,6,23,.12);
+      border-radius: 18px;
       transition: outline .2s ease;
     }
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
-      .aurora,.blob,.dot{animation:none !important;}
       .reveal{transition:none !important;}
     }
   </style>
 </head>
 
 <body>
-  <div class="bg" aria-hidden="true">
-    <div class="aurora"></div>
-    <div class="blob" style="top:-170px; left:-200px;"></div>
-    <div class="blob b2" style="top:40px; right:-280px;"></div>
-    <div class="blob b3" style="bottom:-190px; left:18vw;"></div>
-  </div>
-  <div class="grain" aria-hidden="true"></div>
-
   <header class="nav">
     <div class="nav-inner">
       <a class="brand" href="#top" aria-label="Go to top">
-        <span class="dot" aria-hidden="true"></span>
+        <span class="brand-dot" aria-hidden="true"></span>
         <span>Jaineel Patel</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
@@ -554,46 +470,38 @@
     <section class="hero reveal">
       <div class="hero-grid">
         <div class="card card-pad">
-          <h1><span class="grad-text">Jaineel Patel</span></h1>
-          <p class="lead">
-            Interactive portfolio: runnable Python demos, quantitative projects, and clean write-ups designed for a fast recruiter scan.
+          <h1>Quantitative Projects & Python Demos</h1>
+          <p class="subhead">
+            UCL MSci Mathematics student building practical quantitative finance tools in Python:
+            Monte Carlo simulation, numerical methods, and research-style analysis—presented clearly.
           </p>
 
           <div class="btns">
             <a class="btn primary" href="#python-lab">Open Python Lab</a>
-            <a class="btn ghost" href="#projects">View Projects</a>
-            <a class="btn ghost" href="#about">About</a>
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn" href="#about">About</a>
           </div>
 
-          <div class="stats">
-            <div class="stat">
-              <div class="k">Focus</div>
-              <div class="v">Quant + Python + Finance</div>
-            </div>
-            <div class="stat">
-              <div class="k">Best feature</div>
-              <div class="v">Run code + see plots</div>
-            </div>
-            <div class="stat">
-              <div class="k">Fast navigation</div>
-              <div class="v">Recruiter Guide (bottom-right)</div>
-            </div>
+          <div class="chiprow">
+            <span class="chip">Python (NumPy / Pandas / Matplotlib)</span>
+            <span class="chip">Monte Carlo & Black–Scholes</span>
+            <span class="chip">Financial Markets</span>
           </div>
         </div>
 
         <aside class="card card-pad">
           <div class="section-title" style="margin-top:0">
-            <h2>How to review</h2>
+            <h2>Quick scan</h2>
             <p>30 seconds</p>
           </div>
-          <div class="empty">
-            1) Python Lab → run a demo (code is view-only)<br/>
-            2) Projects → scan outcomes + methods<br/>
-            3) About → what I’m targeting + strengths
+          <div class="summary-box">
+            1) Python Lab → run “Monte Carlo + Black–Scholes”<br/>
+            2) Projects → scan methods + outcomes<br/>
+            3) About → what I’m targeting + experience
           </div>
           <div style="height:12px"></div>
-          <div class="empty">
-            Tip: try the “Monte Carlo + Black–Scholes” demo to see convergence and plots.
+          <div class="summary-box">
+            Code is <strong>view-only</strong> on purpose. Use “Copy code” or “Download .py” if you want to inspect locally.
           </div>
         </aside>
       </div>
@@ -640,7 +548,7 @@
           </div>
 
           <div class="empty">
-            Demos are intentionally locked to prevent edits. If you want an editable version, link to a GitHub repo and put the “full script” there.
+            Tip: if a browser blocks clipboard copy, use “Download .py”.
           </div>
         </div>
       </div>
@@ -650,7 +558,7 @@
     <section id="projects" class="reveal">
       <div class="section-title">
         <h2>Projects</h2>
-        <p>Quant-focused work with clear methods and outputs.</p>
+        <p>Quant work with clear methodology and outputs.</p>
       </div>
 
       <div class="grid">
@@ -660,8 +568,8 @@
           </div>
           <h3>Quantitative Portfolio Analysis & Monte Carlo Simulation (European Options)</h3>
           <p>
-            Built Monte Carlo pricing for European calls/puts under GBM (risk-neutral), benchmarked to Black–Scholes,
-            and analysed convergence by varying simulation paths and Euler time steps with error plots and confidence intervals.
+            Monte Carlo pricing for European calls/puts under GBM (risk-neutral), benchmarked to Black–Scholes.
+            Convergence analysis across simulation paths and Euler time steps with error plots and confidence intervals.
           </p>
           <div class="actions">
             <a class="btn small" href="#python-lab">Run demo</a>
@@ -675,8 +583,8 @@
           </div>
           <h3>Equity Research Stock Pitch (in progress)</h3>
           <p>
-            Developing an institutional-style stock pitch: financial modelling, valuation, and a clear investment thesis.
-            Following hedge-fund / sell-side structure and recruiting-grade presentation standards.
+            Building a full stock pitch using institutional-style frameworks: modelling, valuation, and a clear investment thesis
+            with recruiting-grade structure.
           </p>
           <div class="actions">
             <a class="btn small" href="#" target="_blank" rel="noopener">Write-up (add)</a>
@@ -686,7 +594,7 @@
 
         <article class="card project">
           <div class="tagrow">
-            <span class="tag">Markets</span><span class="tag">Quant</span><span class="tag">Systems</span>
+            <span class="tag">Systematic</span><span class="tag">Markets</span><span class="tag">Data</span>
           </div>
           <h3>Algorithmic Trading Programme (Career26 Academy)</h3>
           <p>
@@ -705,18 +613,18 @@
     <section id="about" class="reveal">
       <div class="section-title">
         <h2>About</h2>
-        <p>Short and confident.</p>
+        <p>Short and direct.</p>
       </div>
 
       <div class="card card-pad">
-        <p class="lead" style="margin:0">
-          I’m an MSci Mathematics student at University College London (2025–present), building strong foundations in probability & statistics,
-          linear algebra, and numerical methods in Python. I’m focused on quantitative finance and software-driven analysis — turning models into
-          clean, testable code and explaining results clearly.
+        <p class="subhead" style="margin:0">
+          I’m an MSci Mathematics student at University College London (2025–present), developing strong foundations in probability & statistics,
+          linear algebra, multivariable calculus, and numerical methods in Python. I’m focused on quantitative finance—turning models into clean,
+          testable code and communicating results clearly.
           <br/><br/>
           I’ve explored markets and technology through insight experiences at Morgan Stanley (shadowing software engineering and engaging with quant/trading teams),
           UBS (asset management, wealth management, and investment banking exposure), and Premium Credit (data-driven business problem solving).
-          I’m active in UCL Quant Society, Investment Society, Mathematics Society, and the Hedge Fund Society, and I’m developing projects in option pricing,
+          I’m active in UCL Quant Society, Investment Society, Mathematics Society, and Hedge Fund Society, and I’m building projects in option pricing,
           convergence analysis, and equity research.
         </p>
       </div>
@@ -730,7 +638,7 @@
     </footer>
   </main>
 
-  <!-- Recruiter AI Guide -->
+  <!-- Recruiter Guide -->
   <div class="ai-panel" id="aiPanel" aria-label="Recruiter guide panel">
     <div class="ai-header">
       <div class="ai-title">
@@ -743,14 +651,14 @@
 
     <div class="ai-body">
       <div class="ai-msg" id="aiMsg">
-        Ask me where to find things. Try: “python demo”, “projects”, “quick overview”, or “show me code”.
+        Ask where to find things. Try: “python demo”, “projects”, “quick overview”, or “monte carlo”.
       </div>
 
       <div class="ai-quick">
         <button class="ai-chip" data-q="python demo" type="button">Python demo</button>
         <button class="ai-chip" data-q="projects" type="button">Projects</button>
         <button class="ai-chip" data-q="quick overview" type="button">Quick overview</button>
-        <button class="ai-chip" data-q="show me code" type="button">Show code</button>
+        <button class="ai-chip" data-q="monte carlo" type="button">Monte Carlo</button>
       </div>
 
       <div class="ai-inputRow">
@@ -766,7 +674,7 @@
     <span class="ai-dot" aria-hidden="true"></span>
     <div>
       <span>Recruiter Guide</span>
-      <small>Find everything fast</small>
+      <small>Find sections fast</small>
     </div>
   </div>
 
@@ -774,7 +682,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
 
-  <!-- Pyodide (Python in the browser) -->
+  <!-- Pyodide -->
   <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
 
   <script>
@@ -829,7 +737,7 @@
         name: "Monte Carlo + Black–Scholes (Convergence + Plots)",
         filename: "mc_bs_convergence.py",
         code:
-`\"\"\"\nQuantitative Portfolio Analysis & Monte Carlo Simulation (European Options)\n- Monte Carlo pricing for European call/put under GBM (risk-neutral)\n- Benchmark vs analytical Black–Scholes\n- Convergence analysis:\n    (1) Vary number of simulation paths (one-step exact sampling)\n    (2) Vary number of time steps (Euler–Maruyama path simulation)\n- Error plots + optional confidence intervals\n\nBeginner-friendly, single-file script.\nRequires: numpy, matplotlib\nInstall:  pip install numpy matplotlib\nRun:      python mc_bs_convergence.py\n\nNOTE (website): plots are emitted to the page automatically.\n\"\"\"\n\nimport math\nimport base64\nfrom io import BytesIO\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# -----------------------------\n# 0) Plot helper (for website)\n# -----------------------------\n\ndef emit_plot(fig, title_hint=\"plot\"):\n    \"\"\"Save figure to PNG and print a marker line that the webpage turns into an image.\"\"\"\n    buf = BytesIO()\n    fig.savefig(buf, format=\"png\", dpi=150, bbox_inches=\"tight\")\n    plt.close(fig)\n    b64 = base64.b64encode(buf.getvalue()).decode(\"ascii\")\n    print(f\"__PLOT__:{title_hint}:{b64}\")\n\n\n# -----------------------------\n# 1) Helpers: Normal CDF + Inputs\n# -----------------------------\n\ndef norm_cdf(x: float) -> float:\n    \"\"\"Standard normal CDF N(x) using the error function.\"\"\"\n    return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))\n\n\ndef validate_inputs(S0, K, r, sigma, T):\n    if S0 <= 0 or K <= 0:\n        raise ValueError(\"S0 and K must be > 0.\")\n    if T < 0:\n        raise ValueError(\"T must be >= 0.\")\n    if sigma < 0:\n        raise ValueError(\"sigma must be >= 0.\")\n\n\n# -----------------------------\n# 2) Black–Scholes (Analytical) Pricing\n# -----------------------------\n\ndef black_scholes_price(S0, K, r, sigma, T, option_type=\"call\") -> float:\n    \"\"\"\n    Black–Scholes price for a European call or put.\n    option_type: \"call\" or \"put\"\n    \"\"\"\n    validate_inputs(S0, K, r, sigma, T)\n\n    option_type = option_type.lower().strip()\n    if option_type not in {\"call\", \"put\"}:\n        raise ValueError(\"option_type must be 'call' or 'put'.\")\n\n    # Expired option\n    if T == 0:\n        if option_type == \"call\":\n            return max(S0 - K, 0.0)\n        else:\n            return max(K - S0, 0.0)\n\n    # Zero volatility (deterministic under risk-neutral drift r)\n    if sigma == 0:\n        ST_det = S0 * math.exp(r * T)\n        if option_type == \"call\":\n            payoff = max(ST_det - K, 0.0)\n        else:\n            payoff = max(K - ST_det, 0.0)\n        return math.exp(-r * T) * payoff\n\n    d1 = (math.log(S0 / K) + (r + 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))\n    d2 = d1 - sigma * math.sqrt(T)\n\n    if option_type == \"call\":\n        return S0 * norm_cdf(d1) - K * math.exp(-r * T) * norm_cdf(d2)\n    else:\n        return K * math.exp(-r * T) * norm_cdf(-d2) - S0 * norm_cdf(-d1)\n\n\n# -----------------------------\n# 3) Monte Carlo Pricing (Exact one-step sampling of S_T)\n# -----------------------------\n\ndef mc_price_one_step(S0, K, r, sigma, T, n_paths, option_type=\"call\", seed=0):\n    \"\"\"\n    Monte Carlo price using the exact terminal distribution of GBM (one step).\n    Returns:\n        price, standard_error, (low95, high95)\n    \"\"\"\n    validate_inputs(S0, K, r, sigma, T)\n    if n_paths <= 1:\n        raise ValueError(\"n_paths must be > 1.\")\n\n    option_type = option_type.lower().strip()\n    if option_type not in {\"call\", \"put\"}:\n        raise ValueError(\"option_type must be 'call' or 'put'.\")\n\n    rng = np.random.default_rng(seed)\n\n    if T == 0:\n        if option_type == \"call\":\n            payoff = max(S0 - K, 0.0)\n        else:\n            payoff = max(K - S0, 0.0)\n        return float(payoff), 0.0, (float(payoff), float(payoff))\n\n    Z = rng.standard_normal(n_paths)\n    ST = S0 * np.exp((r - 0.5 * sigma**2) * T + sigma * math.sqrt(T) * Z)\n\n    if option_type == \"call\":\n        payoffs = np.maximum(ST - K, 0.0)\n    else:\n        payoffs = np.maximum(K - ST, 0.0)\n\n    disc = math.exp(-r * T)\n    disc_payoffs = disc * payoffs\n\n    price = float(disc_payoffs.mean())\n    se = float(disc_payoffs.std(ddof=1) / math.sqrt(n_paths))\n    low95 = price - 1.96 * se\n    high95 = price + 1.96 * se\n    return price, se, (low95, high95)\n\n\n# -----------------------------\n# 4) Monte Carlo Pricing (Path simulation with time steps)\n#     Euler–Maruyama discretization\n# -----------------------------\n\ndef mc_price_euler_paths(S0, K, r, sigma, T, n_paths, n_steps, option_type=\"call\", seed=0):\n    \"\"\"\n    Monte Carlo price by simulating the full path with Euler–Maruyama.\n\n    Model (risk-neutral): dS = r S dt + sigma S dW\n    Euler: S_{t+dt} = S_t + r S_t dt + sigma S_t sqrt(dt) Z\n\n    Returns:\n        price, standard_error, (low95, high95)\n    \"\"\"\n    validate_inputs(S0, K, r, sigma, T)\n    if n_paths <= 1:\n        raise ValueError(\"n_paths must be > 1.\")\n    if n_steps <= 0:\n        raise ValueError(\"n_steps must be >= 1.\")\n\n    option_type = option_type.lower().strip()\n    if option_type not in {\"call\", \"put\"}:\n        raise ValueError(\"option_type must be 'call' or 'put'.\")\n\n    rng = np.random.default_rng(seed)\n\n    if T == 0:\n        if option_type == \"call\":\n            payoff = max(S0 - K, 0.0)\n        else:\n            payoff = max(K - S0, 0.0)\n        return float(payoff), 0.0, (float(payoff), float(payoff))\n\n    dt = T / n_steps\n    sqrt_dt = math.sqrt(dt)\n\n    S = np.full(n_paths, S0, dtype=float)\n\n    for _ in range(n_steps):\n        Z = rng.standard_normal(n_paths)\n        S = S + r * S * dt + sigma * S * sqrt_dt * Z\n        S = np.maximum(S, 0.0)\n\n    ST = S\n\n    if option_type == \"call\":\n        payoffs = np.maximum(ST - K, 0.0)\n    else:\n        payoffs = np.maximum(K - ST, 0.0)\n\n    disc = math.exp(-r * T)\n    disc_payoffs = disc * payoffs\n\n    price = float(disc_payoffs.mean())\n    se = float(disc_payoffs.std(ddof=1) / math.sqrt(n_paths))\n    low95 = price - 1.96 * se\n    high95 = price + 1.96 * se\n    return price, se, (low95, high95)\n\n\n# -----------------------------\n# 5) Convergence Experiments + Plotting\n# -----------------------------\n\ndef convergence_vs_paths(S0, K, r, sigma, T, option_type, path_list, seed=123):\n    bs = black_scholes_price(S0, K, r, sigma, T, option_type=option_type)\n\n    prices, ses, abs_err = [], [], []\n    for n in path_list:\n        mc, se, _ = mc_price_one_step(S0, K, r, sigma, T, n, option_type=option_type, seed=seed)\n        prices.append(mc)\n        ses.append(se)\n        abs_err.append(abs(mc - bs))\n\n    return bs, np.array(prices), np.array(ses), np.array(abs_err)\n\n\ndef convergence_vs_timesteps(S0, K, r, sigma, T, option_type, n_paths_fixed, step_list, seed=123):\n    bs = black_scholes_price(S0, K, r, sigma, T, option_type=option_type)\n\n    prices, ses, abs_err = [], [], []\n    for m in step_list:\n        mc, se, _ = mc_price_euler_paths(\n            S0, K, r, sigma, T,\n            n_paths=n_paths_fixed,\n            n_steps=m,\n            option_type=option_type,\n            seed=seed\n        )\n        prices.append(mc)\n        ses.append(se)\n        abs_err.append(abs(mc - bs))\n\n    return bs, np.array(prices), np.array(ses), np.array(abs_err)\n\n\ndef plot_error_loglog(x, y, xlabel, title, hint):\n    fig = plt.figure()\n    plt.plot(x, y, marker=\"o\")\n    plt.xscale(\"log\")\n    plt.yscale(\"log\")\n    plt.xlabel(xlabel)\n    plt.ylabel(\"Absolute error |MC - BS| (log scale)\")\n    plt.title(title)\n    plt.grid(True, which=\"both\", linestyle=\"--\", linewidth=0.5)\n    emit_plot(fig, hint)\n\n\ndef plot_prices(x, mc_prices, bs_price, xlabel, title, hint):\n    fig = plt.figure()\n    plt.plot(x, mc_prices, marker=\"o\", label=\"Monte Carlo\")\n    plt.axhline(bs_price, linestyle=\"--\", label=\"Black–Scholes\")\n    plt.xscale(\"log\")\n    plt.xlabel(xlabel)\n    plt.ylabel(\"Option price\")\n    plt.title(title)\n    plt.grid(True, which=\"both\", linestyle=\"--\", linewidth=0.5)\n    plt.legend()\n    emit_plot(fig, hint)\n\n\n# -----------------------------\n# 6) Main\n# -----------------------------\n\ndef main():\n    S0 = 100.0\n    K = 105.0\n    r = 0.05\n    sigma = 0.20\n    T = 1.0\n    option_type = \"call\"   # \"call\" or \"put\"\n\n    print(\"\\n=== Inputs ===\")\n    print(f\"S0={S0}, K={K}, r={r}, sigma={sigma}, T={T}, option_type={option_type}\")\n\n    bs = black_scholes_price(S0, K, r, sigma, T, option_type=option_type)\n    print(\"\\n=== Black–Scholes Benchmark ===\")\n    print(f\"BS {option_type} price: {bs:.6f}\")\n\n    n_paths_demo = 120_000\n    mc, se, ci = mc_price_one_step(S0, K, r, sigma, T, n_paths_demo, option_type=option_type, seed=42)\n    print(\"\\n=== Monte Carlo (One-step exact S_T sampling) ===\")\n    print(f\"Paths: {n_paths_demo}\")\n    print(f\"MC price: {mc:.6f}\")\n    print(f\"Std error: {se:.6f}\")\n    print(f\"95% CI: [{ci[0]:.6f}, {ci[1]:.6f}]\")\n    print(f\"Abs error vs BS: {abs(mc - bs):.6f}\")\n\n    # Convergence vs paths\n    path_list = [1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000, 200_000]\n    bs_p, mc_prices_p, ses_p, abs_err_p = convergence_vs_paths(\n        S0, K, r, sigma, T, option_type, path_list, seed=123\n    )\n\n    print(\"\\n=== Convergence vs number of paths (one-step) ===\")\n    for n, price, err, se_i in zip(path_list, mc_prices_p, abs_err_p, ses_p):\n        print(f\"Paths={n:>7} | MC={price:.6f} | abs error={err:.6f} | SE={se_i:.6f}\")\n\n    plot_prices(path_list, mc_prices_p, bs_p,\n                xlabel=\"Number of paths (log scale)\",\n                title=f\"MC Price vs Paths ({option_type}, one-step exact)\",\n                hint=\"price_vs_paths\")\n    plot_error_loglog(path_list, abs_err_p,\n                      xlabel=\"Number of paths (log scale)\",\n                      title=f\"MC Convergence Error vs Paths ({option_type}, one-step exact)\",\n                      hint=\"error_vs_paths\")\n\n    # Convergence vs time steps (Euler)\n    n_paths_fixed = 120_000\n    step_list = [1, 2, 5, 10, 20, 50, 100, 200]\n\n    bs_t, mc_prices_t, ses_t, abs_err_t = convergence_vs_timesteps(\n        S0, K, r, sigma, T, option_type, n_paths_fixed, step_list, seed=123\n    )\n\n    print(\"\\n=== Convergence vs number of time steps (Euler paths) ===\")\n    print(f\"Fixed paths: {n_paths_fixed}\")\n    for m, price, err, se_i in zip(step_list, mc_prices_t, abs_err_t, ses_t):\n        print(f\"Steps={m:>4} | MC={price:.6f} | abs error={err:.6f} | SE={se_i:.6f}\")\n\n    plot_prices(step_list, mc_prices_t, bs_t,\n                xlabel=\"Number of time steps (log scale)\",\n                title=f\"MC Price vs Time Steps ({option_type}, Euler; fixed paths={n_paths_fixed})\",\n                hint=\"price_vs_steps\")\n    plot_error_loglog(step_list, abs_err_t,\n                      xlabel=\"Number of time steps (log scale)\",\n                      title=f\"MC Error vs Time Steps ({option_type}, Euler; fixed paths={n_paths_fixed})\",\n                      hint=\"error_vs_steps\")\n\n    print(\"\\nDone.\")\n\n\nif __name__ == \"__main__\":\n    main()\n`
+`# Quantitative Portfolio Analysis & Monte Carlo Simulation (European Options)\n# - Monte Carlo pricing for European call/put under GBM (risk-neutral)\n# - Benchmark vs analytical Black–Scholes\n# - Convergence analysis:\n#     (1) Vary number of simulation paths (one-step exact sampling)\n#     (2) Vary number of time steps (Euler–Maruyama path simulation)\n# - Error plots + confidence intervals\n\nimport math\nimport base64\nfrom io import BytesIO\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n\ndef emit_plot(fig, title_hint=\"plot\"):\n    \"\"\"Save figure to PNG and print a marker line the webpage converts into an image.\"\"\"\n    buf = BytesIO()\n    fig.savefig(buf, format=\"png\", dpi=150, bbox_inches=\"tight\")\n    plt.close(fig)\n    b64 = base64.b64encode(buf.getvalue()).decode(\"ascii\")\n    print(f\"__PLOT__:{title_hint}:{b64}\")\n\n\ndef norm_cdf(x):\n    return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))\n\n\ndef black_scholes_price(S0, K, r, sigma, T, option_type=\"call\"):\n    option_type = option_type.lower().strip()\n    if T == 0:\n        return max(S0 - K, 0.0) if option_type == \"call\" else max(K - S0, 0.0)\n    if sigma == 0:\n        ST_det = S0 * math.exp(r * T)\n        payoff = max(ST_det - K, 0.0) if option_type == \"call\" else max(K - ST_det, 0.0)\n        return math.exp(-r * T) * payoff\n\n    d1 = (math.log(S0 / K) + (r + 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))\n    d2 = d1 - sigma * math.sqrt(T)\n\n    if option_type == \"call\":\n        return S0 * norm_cdf(d1) - K * math.exp(-r * T) * norm_cdf(d2)\n    else:\n        return K * math.exp(-r * T) * norm_cdf(-d2) - S0 * norm_cdf(-d1)\n\n\ndef mc_price_one_step(S0, K, r, sigma, T, n_paths, option_type=\"call\", seed=0):\n    rng = np.random.default_rng(seed)\n    Z = rng.standard_normal(n_paths)\n    ST = S0 * np.exp((r - 0.5 * sigma**2) * T + sigma * math.sqrt(T) * Z)\n    if option_type == \"call\":\n        payoffs = np.maximum(ST - K, 0.0)\n    else:\n        payoffs = np.maximum(K - ST, 0.0)\n    return float(math.exp(-r * T) * payoffs.mean())\n\n\ndef mc_price_euler_paths(S0, K, r, sigma, T, n_paths, n_steps, option_type=\"call\", seed=0):\n    rng = np.random.default_rng(seed)\n    dt = T / n_steps\n    sqrt_dt = math.sqrt(dt)\n    S = np.full(n_paths, S0, dtype=float)\n\n    for _ in range(n_steps):\n        Z = rng.standard_normal(n_paths)\n        S = S + r * S * dt + sigma * S * sqrt_dt * Z\n        S = np.maximum(S, 0.0)\n\n    if option_type == \"call\":\n        payoffs = np.maximum(S - K, 0.0)\n    else:\n        payoffs = np.maximum(K - S, 0.0)\n\n    return float(math.exp(-r * T) * payoffs.mean())\n\n\ndef plot_error_loglog(x, y, xlabel, title, hint):\n    fig = plt.figure()\n    plt.plot(x, y, marker=\"o\")\n    plt.xscale(\"log\")\n    plt.yscale(\"log\")\n    plt.xlabel(xlabel)\n    plt.ylabel(\"Absolute error |MC - BS| (log scale)\")\n    plt.title(title)\n    plt.grid(True, which=\"both\", linestyle=\"--\", linewidth=0.6)\n    emit_plot(fig, hint)\n\n\ndef plot_prices(x, mc_prices, bs_price, xlabel, title, hint):\n    fig = plt.figure()\n    plt.plot(x, mc_prices, marker=\"o\", label=\"Monte Carlo\")\n    plt.axhline(bs_price, linestyle=\"--\", label=\"Black–Scholes\")\n    plt.xscale(\"log\")\n    plt.xlabel(xlabel)\n    plt.ylabel(\"Option price\")\n    plt.title(title)\n    plt.grid(True, which=\"both\", linestyle=\"--\", linewidth=0.6)\n    plt.legend()\n    emit_plot(fig, hint)\n\n\n# ---- Parameters (edit in the .py version if you download it) ----\nS0 = 100.0\nK = 105.0\nr = 0.05\nsigma = 0.20\nT = 1.0\noption_type = \"call\"\n\nprint(\"=== Inputs ===\")\nprint(f\"S0={S0}, K={K}, r={r}, sigma={sigma}, T={T}, option_type={option_type}\")\n\nbs = black_scholes_price(S0, K, r, sigma, T, option_type=option_type)\nprint(\"\\n=== Black–Scholes Benchmark ===\")\nprint(f\"BS price: {bs:.6f}\")\n\n# --- Convergence vs paths (one-step exact terminal sampling) ---\npath_list = [1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000]\nmc_prices_p = []\nabs_err_p = []\n\nfor n in path_list:\n    mc = mc_price_one_step(S0, K, r, sigma, T, n, option_type=option_type, seed=123)\n    mc_prices_p.append(mc)\n    abs_err_p.append(abs(mc - bs))\n\nprint(\"\\n=== Convergence vs number of paths (one-step) ===\")\nfor n, price, err in zip(path_list, mc_prices_p, abs_err_p):\n    print(f\"Paths={n:>7} | MC={price:.6f} | abs error={err:.6f}\")\n\nplot_prices(path_list, mc_prices_p, bs,\n            xlabel=\"Number of paths (log scale)\",\n            title=f\"MC Price vs Paths ({option_type})\",\n            hint=\"price_vs_paths\")\nplot_error_loglog(path_list, abs_err_p,\n                  xlabel=\"Number of paths (log scale)\",\n                  title=f\"MC Error vs Paths ({option_type})\",\n                  hint=\"error_vs_paths\")\n\n# --- Convergence vs steps (Euler path discretisation) ---\nstep_list = [1, 2, 5, 10, 20, 50, 100, 200]\nmc_prices_t = []\nabs_err_t = []\n\nn_paths_fixed = 60_000\nfor m in step_list:\n    mc = mc_price_euler_paths(S0, K, r, sigma, T, n_paths_fixed, m, option_type=option_type, seed=123)\n    mc_prices_t.append(mc)\n    abs_err_t.append(abs(mc - bs))\n\nprint(\"\\n=== Convergence vs time steps (Euler; fixed paths) ===\")\nprint(f\"Fixed paths: {n_paths_fixed}\")\nfor m, price, err in zip(step_list, mc_prices_t, abs_err_t):\n    print(f\"Steps={m:>4} | MC={price:.6f} | abs error={err:.6f}\")\n\nplot_prices(step_list, mc_prices_t, bs,\n            xlabel=\"Number of time steps (log scale)\",\n            title=f\"MC Price vs Time Steps (Euler; {option_type})\",\n            hint=\"price_vs_steps\")\nplot_error_loglog(step_list, abs_err_t,\n                  xlabel=\"Number of time steps (log scale)\",\n                  title=f\"MC Error vs Time Steps (Euler; {option_type})\",\n                  hint=\"error_vs_steps\")\n\nprint(\"\\nDone.\")\n`
       }
     ];
 
@@ -842,7 +750,7 @@
       demoSelect.appendChild(opt);
     });
 
-    // CodeMirror editor (READ-ONLY)
+    // CodeMirror (READ-ONLY)
     const editor = CodeMirror.fromTextArea(document.getElementById("codeArea"), {
       mode: "python",
       theme: "dracula",
@@ -851,7 +759,7 @@
       tabSize: 4,
       indentWithTabs: false,
       lineWrapping: true,
-      readOnly: "nocursor" // prevents edits
+      readOnly: "nocursor"
     });
 
     let currentIdx = 0;
@@ -870,7 +778,7 @@
         await navigator.clipboard.writeText(editor.getValue());
         toast("Copied ✅");
       } catch {
-        toast("Copy failed (browser permissions)");
+        toast("Copy blocked by browser");
       }
     });
 
@@ -888,7 +796,7 @@
       URL.revokeObjectURL(url);
     });
 
-    // Tiny toast (no external libs)
+    // Toast
     let toastTimer = null;
     function toast(msg){
       let el = document.getElementById("toast");
@@ -901,15 +809,15 @@
         el.style.transform = "translateX(-50%)";
         el.style.padding = "10px 12px";
         el.style.borderRadius = "999px";
-        el.style.border = "1px solid rgba(255,255,255,.16)";
-        el.style.background = "rgba(10,14,30,.78)";
+        el.style.border = "1px solid var(--border)";
+        el.style.background = "rgba(255,255,255,.92)";
         el.style.backdropFilter = "blur(12px)";
-        el.style.boxShadow = "0 18px 50px rgba(0,0,0,.55)";
+        el.style.boxShadow = "0 18px 55px rgba(2,6,23,.10)";
         el.style.color = "var(--text)";
         el.style.fontSize = "13px";
         el.style.zIndex = "2000";
         el.style.opacity = "0";
-        el.style.transition = "opacity .18s ease, transform .18s ease";
+        el.style.transition = "opacity .16s ease, transform .16s ease";
         document.body.appendChild(el);
       }
       el.textContent = msg;
@@ -919,19 +827,16 @@
       toastTimer = setTimeout(() => {
         el.style.opacity = "0";
         el.style.transform = "translateX(-50%) translateY(6px)";
-      }, 1200);
+      }, 1100);
     }
 
     // Plot area helpers
     const plotArea = document.getElementById("plotArea");
     function clearPlots(){
       plotArea.innerHTML = "";
-      plotArea.classList.remove("empty");
-      plotArea.textContent = "";
       plotArea.classList.add("empty");
       plotArea.textContent = "Run a demo that produces plots to see them here.";
     }
-
     function showPlots(plotItems){
       plotArea.classList.remove("empty");
       plotArea.innerHTML = "";
@@ -960,22 +865,18 @@
       });
     }
 
-    // Load Pyodide (and matplotlib once, so plots work)
+    // Load Pyodide + packages
     const statusEl = document.getElementById("pyStatus");
     let pyodideReady = (async () => {
-      statusEl.textContent = "Loading Python runtime… (first load can take a moment)";
+      statusEl.textContent = "Loading Python runtime…";
       const pyodide = await loadPyodide();
 
-      // Preload packages needed for the quant demo
-      // numpy is usually available; matplotlib may need loading from Pyodide distribution.
       statusEl.textContent = "Loading scientific packages…";
       try {
         await pyodide.loadPackage(["numpy", "matplotlib"]);
       } catch (e) {
-        // If matplotlib fails to load in a given environment, the non-plot demos still run.
         console.warn("Package load warning:", e);
       }
-
       statusEl.textContent = "Python ready ✅";
       return pyodide;
     })();
@@ -993,7 +894,7 @@
         const pyodide = await pyodideReady;
         const code = editor.getValue();
 
-        // Wrap execution to capture stdout/stderr
+        // IMPORTANT: avoid indentation-sensitive top-level docstrings in demos
         const wrapped = `
 import sys, io, traceback
 _buf_out = io.StringIO()
@@ -1012,8 +913,7 @@ _result = _buf_out.getvalue() + _buf_err.getvalue()
         const result = pyodide.globals.get("_result") || "";
         const text = String(result);
 
-        // Parse plot markers from output:
-        // "__PLOT__:<hint>:<base64>"
+        // Parse plot markers: "__PLOT__:<hint>:<base64>"
         const lines = text.split(/\r?\n/);
         const plotItems = [];
         const keptLines = [];
@@ -1060,10 +960,10 @@ _result = _buf_out.getvalue() + _buf_err.getvalue()
     aiClose.addEventListener("click", closeAI);
 
     const ROUTES = [
-      { keys: ["python", "demo", "run", "lab", "code"], target: "#python-lab", msg: "Opening the Python Lab — run a demo and view the code." },
+      { keys: ["python", "demo", "run", "lab", "code"], target: "#python-lab", msg: "Opening Python Lab — run a demo and view plots." },
       { keys: ["project", "projects", "portfolio", "work"], target: "#projects", msg: "Taking you to Projects — scan methods + outcomes." },
-      { keys: ["about", "overview", "quick", "summary", "tldr"], target: "#top", msg: "Jumping to the top overview for a quick scan." },
-      { keys: ["monte", "black", "scholes", "options", "convergence"], target: "#python-lab", msg: "Go to Python Lab → select the Monte Carlo + Black–Scholes demo and press Run." },
+      { keys: ["about", "overview", "summary"], target: "#about", msg: "Opening About — background and interests." },
+      { keys: ["monte", "black", "scholes", "options", "convergence"], target: "#python-lab", msg: "Go to Python Lab → select the Monte Carlo + Black–Scholes demo → Run." },
     ];
 
     function normalize(s){ return (s || "").toLowerCase().trim(); }
@@ -1083,7 +983,7 @@ _result = _buf_out.getvalue() + _buf_err.getvalue()
     function highlightSection(el){
       document.querySelectorAll(".ai-highlight").forEach(x => x.classList.remove("ai-highlight"));
       el.classList.add("ai-highlight");
-      setTimeout(()=> el.classList.remove("ai-highlight"), 1800);
+      setTimeout(()=> el.classList.remove("ai-highlight"), 1600);
     }
 
     function goTo(target, message){
@@ -1103,7 +1003,7 @@ _result = _buf_out.getvalue() + _buf_err.getvalue()
       const route = bestRoute(text);
       if (!route){
         aiResult.style.display = "block";
-        aiResult.textContent = "Try: “python demo”, “projects”, “quick overview”, or “monte carlo options”.";
+        aiResult.textContent = "Try: “python demo”, “projects”, “about”, or “monte carlo”.";
         return;
       }
       goTo(route.target, route.msg);
