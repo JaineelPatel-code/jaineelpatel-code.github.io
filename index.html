@@ -959,20 +959,32 @@
           code = injectMcParams(code);
         }
 
-        const wrapped = `
+const wrapped = `
+
 import sys, io, traceback
 _buf_out = io.StringIO()
 _buf_err = io.StringIO()
 _old_out, _old_err = sys.stdout, sys.stderr
 sys.stdout, sys.stderr = _buf_out, _buf_err
+
+_code = r"""${code
+  .replaceAll("\\\\", "\\\\\\\\")
+  .replaceAll('"""', '\\"\\"\\"')}"""
+
+
+
 try:
-${code.split("\\n").map(l => "    " + l).join("\\n")}
+    exec(_code, globals())
 except Exception:
     traceback.print_exc()
 finally:
     sys.stdout, sys.stderr = _old_out, _old_err
+
 _result = _buf_out.getvalue() + _buf_err.getvalue()
 `;
+
+
+
         await pyodide.runPythonAsync(wrapped);
         const result = pyodide.globals.get("_result") || "";
         const text = String(result);
@@ -1093,3 +1105,4 @@ _result = _buf_out.getvalue() + _buf_err.getvalue()
   </script>
 </body>
 </html>
+
